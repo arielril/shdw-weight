@@ -1,0 +1,70 @@
+openapi: 3.0.1
+info:
+  title: Weight
+  description: Weight API
+  contact:
+    email: arielril@gmail.com
+  version: 0.0.1
+servers:
+  - url: http://localhost:6000/v1
+tags:
+  - name: weight
+    description: Everything for weight computations
+paths:
+  /compute:
+    post:
+      tags:
+        - weight
+      summary: Compute the probability of a list of paths
+      operationId: computeWeight
+      requestBody:
+        description: List of paths to compute probability
+        content:
+          application/json:
+            schema:
+              items:
+                type: object
+                properties:
+                  source:
+                    properties:
+                      id:
+                        type: string
+                        example: '3E01694E-1714-4628-891B-6391C728B6B5'
+                        description: ID of the node
+                  destination:
+                    properties:
+                      id:
+                        type: string
+                        example: '3E01694E-1714-4628-891B-6391C728B6B5'
+                        description: ID of the node
+                  edges:
+                    items:
+                      type: object
+        required: true
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                properties:
+                  results:
+                    items:
+                      type: object
+
+components:
+  responses:
+    defaultSuccessResult:
+      description: success
+      content:
+        application/json:
+          schema:
+            properties:
+              results:
+                items:
+                  type: object
+                  properties:
+                    value:
+                      type: string
+                      description: Result values
+                      example: something here
